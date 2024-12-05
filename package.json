@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@google-cloud/firestore": "^7.10.0",
+    "@google-cloud/storage": "^7.14.0",
     "@tensorflow/tfjs-node": "^4.22.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
