@@ -63,7 +63,6 @@ export async function postPredict(
         latitude,
         longitude,
       },
-      detectedBoxes,
     };
 
     await storeFirestore(id, data);
