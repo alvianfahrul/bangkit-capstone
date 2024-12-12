@@ -11,9 +11,14 @@ const app = express();
 const port = process.env.PORT || 3000;
 const corsOptions = {
   origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+  exposedHeaders: ["Content-Length", "X-Response-Time"],
+  credentials: true,
+  optionsSuccessStatus: 204,
 };
-
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
 app.use(router);
 
@@ -21,12 +26,12 @@ app.use((err: any, req: any, res: any, next: any) => {
   if (err instanceof InputError) {
     return res.status(err.statusCode).json({
       status: "fail",
-      message: `${err.message} : Silakan gunakan foto lain.`
+      message: `${err.message} : Silakan gunakan foto lain.`,
       // message: "Terjadi kesalahan dalam melakukan prediksi"
     });
   }
 
-  if (err.code === 'LIMIT_FILE_SIZE') {
+  if (err.code === "LIMIT_FILE_SIZE") {
     return res.status(413).json({
       status: "fail",
       // message: `${err.message} : Ukuran file tidak boleh lebih dari 1 MB.`
