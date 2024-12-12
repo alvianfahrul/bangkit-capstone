@@ -30,24 +30,22 @@ export async function postPredict(
     });
   }
 
-/*   if (!req.file) {
+  if (!req.file) {
     return res.status(400).json({
       status: "error",
       message: "No image provided.",
     });
-  } */
+  }
 
   try {
-    // const image = req.file.buffer;
+    const image = req.file.buffer;
 
-    // const publicUrl = await uploadGCS(req.file);
+    const publicUrl = await uploadGCS(req.file);
 
-/*     const { trashCount } = await predictClassification(
+    const { trashCount } = await predictClassification(
       model,
       image
-    ); */
-
-    const trashCount = 10
+    );
 
     const id = crypto.randomUUID();
 
@@ -60,14 +58,14 @@ export async function postPredict(
       lokasi,
       trashCount,
       createdAt,
-      fileUrl: "test.com",
+      fileUrl: publicUrl,
       coordinates: {
         latitude,
         longitude,
       },
     };
 
-    // await storeFirestore(id, data);
+    await storeFirestore(id, data);
 
     return res.status(201).json({
       status: "success",
