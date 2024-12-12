@@ -11,15 +11,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 const corsOptions = {
   origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization", "Accept"],
-  exposedHeaders: ["Content-Length", "X-Response-Time"],
-  credentials: true,
-  optionsSuccessStatus: 204,
+  methods: ["GET", "POST"],
 };
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
-app.use(express.json());
 app.use(router);
 
 app.use((err: any, req: any, res: any, next: any) => {
